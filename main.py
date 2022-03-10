@@ -26,17 +26,22 @@ def run_map_reduce(map_f, reduce_f, docs):
     return [reduce_f(g) for g in groups]
 
 def word_count_map(doc):
-    """
-    Params:
-      doc....a string to be split into tokens. split on whitespace.
-    Returns:
-      a list of tuples of form (token, 1), where token is a whitespace delimited element of this string.
-      
-    E.g.
-    >>> word_count_map('i am sam i am')
-    [('i', 1), ('am', 1), ('sam', 1), ('i', 1), ('am', 1)]
-    """
-    ###TODO
+  """
+  Params:
+    doc....a string to be split into tokens. split on whitespace.
+  Returns:
+    a list of tuples of form (token, 1), where token is a whitespace delimited element of this string.
+    
+  E.g.
+  >>> word_count_map('i am sam i am')
+  [('i', 1), ('am', 1), ('sam', 1), ('i', 1), ('am', 1)]
+  """
+  ###TODO
+  tupleList = []
+  for word in doc.split():
+    tupleList.append((word, 1))
+  return tupleList
+  
     
     
 
@@ -45,19 +50,21 @@ def test_word_count_map():
            [('i', 1), ('am', 1), ('sam', 1), ('i', 1), ('am', 1)]
 
 def word_count_reduce(group):
-    """
-    Params:
-      group...a tuple of the form (token, list_of_ones), indicating the number of times each word appears.
-    Returns:
-      tuple of form (token, int), where int is the number of times that token appears
-    E.g.
-    >>> word_count_reduce(['i', [1,1]])
-    ('i', 2)
-    
-    NOTE: you should use call the `reduce` function here.
-    """
-    ###TODO
-    
+  """
+  Params:
+  group...a tuple of the form (token, list_of_ones), indicating the number of times each word appears.
+  Returns:
+  tuple of form (token, int), where int is the number of times that token appears
+  E.g.
+  >>> word_count_reduce(['i', [1,1]])
+  ('i', 2)
+  
+  NOTE: you should use call the `reduce` function here.
+  """
+  ###TODO
+  sum = reduce(plus, 0, group[1])
+  return(group[0], sum)
+
     
 def test_word_count_reduce():
     assert word_count_reduce(['i', [1,1,1]]) == ('i', 3)
@@ -117,20 +124,26 @@ def reduce(f, id_, a):
 ### PART TWO ###
 
 def sentiment_map(doc,
-                  pos_terms=set(['good', 'great', 'awesome', 'sockdolager']),
-                  neg_terms=set(['bad', 'terrible', 'waste', 'carbuncle', 'corrupted'])):
-    """
-    Params:
-      doc.........a string to be split into tokens. split on whitespace.
-      pos_terms...a set of positive terms
-      neg_terms...a set of negative terms
-    Returns:
-      a list of tuples of form (positive, 1) or (negative, 1)      
-    E.g.
-    >>> sentiment_map('it was a terrible waste of time')
-    [('negative', 1), ('negative', 1)]
-    """
-    ###TODO
+  pos_terms=set(['good', 'great', 'awesome', 'sockdolager']),
+  neg_terms=set(['bad', 'terrible', 'waste', 'carbuncle', 'corrupted'])):
+  """
+  Params:
+  doc.........a string to be split into tokens. split on whitespace.
+  pos_terms...a set of positive terms
+  neg_terms...a set of negative terms
+  Returns:
+  a list of tuples of form (positive, 1) or (negative, 1)      
+  E.g.
+  >>> sentiment_map('it was a terrible waste of time')
+  [('negative', 1), ('negative', 1)]
+  """
+  tupleList = []
+  for word in doc.split():
+    if word in pos_terms:
+      tupleList.append(("positive", 1))
+    elif word in neg_terms:
+      tupleList.append(("negative", 1))
+  return tupleList
 
 
 def test_sentiment_map():

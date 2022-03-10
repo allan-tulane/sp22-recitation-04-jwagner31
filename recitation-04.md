@@ -1,8 +1,7 @@
 # CMPS 2200  Recitation 04
 
-**Name (Team Member 1):**_________________________  
-**Name (Team Member 2):**_________________________
-
+**Name (Team Member 1):** Joe Wagner 
+**Name (Team Member 2):** Luke Albright
 
 In this lab you will practice using the `map` and `reduce` functions. These functions are commonly used together in a `map-reduce` framework, used by Google and others to parallelize and scale common computations.
 
@@ -36,7 +35,8 @@ To use this function to count words, you'll need to implement your own `map_f` a
 
 4. Assume that a word `w` appears `n` times. What is the **work** and **span** of `word_count_reduce` for this word, assuming a parallel implementation of the `reduce` function?
 
-**Enter answer here**
+The work would be O(n) and the span would be O(logn)
+
 
 
 5. Why are we going through all this trouble? Couldn't I just use this function to count words?
@@ -52,7 +52,7 @@ for doc in docs:
 
 What is the problem that prevents us from easily parallelizing this solution?
 
-**Enter answer here**
+This function works, but it is not as effecient as the map and reduce functions. The function above courses through the entire list, "docs" and counts the number of times each item appears in the list. Because it just loops through the split list and does not
 
 
 ## Part 2: Sentiment analysis
