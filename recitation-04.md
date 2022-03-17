@@ -35,9 +35,7 @@ To use this function to count words, you'll need to implement your own `map_f` a
 
 4. Assume that a word `w` appears `n` times. What is the **work** and **span** of `word_count_reduce` for this word, assuming a parallel implementation of the `reduce` function?
 
-The work would be O(n) and the span would be O(logn)
-
-
+The work would be O(n) and the span would be O(logn), as it is simply calling the reduce function.
 
 5. Why are we going through all this trouble? Couldn't I just use this function to count words?
 
@@ -52,7 +50,7 @@ for doc in docs:
 
 What is the problem that prevents us from easily parallelizing this solution?
 
-This function works, but it is not as effecient as the map and reduce functions. The function above courses through the entire list, "docs" and counts the number of times each item appears in the list. Because it just loops through the split list and does not
+This function works, but it is not as effecient as the map and reduce functions. The function above courses through the entire list, "docs" and counts the number of times each item appears in the list. Because it just iterates through the list it is not splitting or reducing the list which makes it difficult to parallelize. 
 
 
 ## Part 2: Sentiment analysis
